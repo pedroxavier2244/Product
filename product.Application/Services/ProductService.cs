@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using Product.Application.DTOs;
 using Product.Application.Interfaces;
 using Product.Domain.Interfaces;
+
 
 namespace Product.Application.Services
 {
@@ -9,12 +11,14 @@ namespace Product.Application.Services
     {
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<ProductService> _logger;
 
-        public ProductService(IProductRepository productRepository, IMapper mapper)
+        public ProductService(IProductRepository productRepository, IMapper mapper, ILogger<ProductService> logger)
         {
             _productRepository = productRepository;
             _mapper = mapper;
-        }
+            _logger = logger;
+        } 
 
         public async Task<ProductDto> CreateAsync(CreateProductDto createProductDto)
         {
